@@ -1,0 +1,35 @@
+{
+  "mainConfig": {
+    "baseUrl": "https://jsonplaceholder.typicode.com"
+  },
+  "appColor": {
+    "pageBg": "#F0F0F0",
+    "headerBg": "#2e2e2e",
+    "headerText": "#ffffff",
+    "menuBg": "#2e2e2e",
+    "menuItemBGColor": "#ffffff",
+    "menuItemSelectedBgColor": "#ffefe6",
+
+    "listTitle": "#2e2e2e",
+    "listItemBg": "#ffffff",
+    "textColor": "#2e2e2e"
+  },
+  "menuItems": [
+    {
+      "component": "posts",
+      "parameters": {
+          "apiName": "posts",
+          "userId": 1
+      },
+      "title": "News"
+    },
+    {
+      "component": "external-page",
+      "parameters": {
+        "url": "https://objects.ws"
+      },
+      "title": "Objects"
+    }
+  ]
+}
+
