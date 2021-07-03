@@ -1,8 +1,8 @@
 package com.objects.appbuilder.feature.main
 
 import android.graphics.Color
-import com.objects.appbuilder.data.local.appconfiguration.entites.AppConfiguration
-import com.objects.appbuilder.data.local.appconfiguration.entites.MenuItem
+import com.objects.appbuilder.data.local.appconfiguration.entities.AppConfiguration
+import com.objects.appbuilder.data.local.appconfiguration.entities.MenuItem
 
 fun AppConfiguration.toUiMainConfiguration(): UiMainConfiguration {
     return UiMainConfiguration(
@@ -17,11 +17,20 @@ fun AppConfiguration.toUiMainConfiguration(): UiMainConfiguration {
                 Color.parseColor(appColor.menuItemBGColor),
                 Color.parseColor(appColor.menuItemSelectedBgColor)
             )
-        }
+        },
+        baseUrl = this.mainConfig.baseUrl
     )
 
 }
 
 private fun MenuItem.toUiMenuItem(backgroundColor: Int, selectedColor: Int): UiMenuItem {
-    return UiMenuItem(title, false, backgroundColor, selectedColor)
+    val componentType = when(component){
+        "posts"->{
+            ComponentType.LIST
+
+        }else->{
+            ComponentType.WEB_VIEW
+        }
+    }
+    return UiMenuItem(title, false, backgroundColor, selectedColor,componentType,api = this.parameters.apiName,url = this.parameters.url)
 }

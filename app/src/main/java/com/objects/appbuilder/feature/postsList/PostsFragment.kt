@@ -1,23 +1,30 @@
 package com.objects.appbuilder.feature.postsList
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.objects.appbuilder.R
 import com.objects.appbuilder.feature.postsList.placeholder.PlaceholderContent
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * A fragment representing a list of Items.
  */
+@AndroidEntryPoint
 class PostsFragment : Fragment() {
 
     private var columnCount = 1
 
+    private val navArg: PostsFragmentArgs by navArgs()
+    val viewModel: PostsViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,6 +50,28 @@ class PostsFragment : Fragment() {
             }
         }
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.fetchData(navArg.baseUrl, navArg.api)
+        viewModel.stateLiveData.observe(viewLifecycleOwner){
+            it?.let{
+                render(it)
+            }
+        }
+    }
+
+    private fun render(state: PostsState) {
+        when(state){
+            PostsState.Error -> {
+                Toast.makeText(requireContext(),"ERROR",Toast.LENGTH_LONG).show()
+
+            }
+            is PostsState.Success -> {
+                Toast.makeText(requireContext(),state.data,Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     companion object {

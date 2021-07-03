@@ -1,4 +1,4 @@
-package com.objects.appbuilder.data.local.appconfiguration.entites
+package com.objects.appbuilder.data.local.appconfiguration.entities
 
 
 import com.google.gson.annotations.SerializedName

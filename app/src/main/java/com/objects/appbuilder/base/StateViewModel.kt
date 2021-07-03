@@ -1,6 +1,5 @@
 package com.objects.appbuilder.base
 
-import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,5 +21,5 @@ open class State
 
 sealed class Effect {
     data class ShowToast(val message: String? = null, val messageResId: Int? = null) : Effect()
-    data class GoTo(val screenId: Int,val navArgs:Bundle):Effect()
+    data class GoToPosts(val baseUrl: String,val api: String) :Effect()
 }

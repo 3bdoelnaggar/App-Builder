@@ -9,6 +9,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.snackbar.Snackbar
+import com.objects.appbuilder.MobileNavigationDirections
 import com.objects.appbuilder.R
 import com.objects.appbuilder.base.Effect
 import com.objects.appbuilder.databinding.MainActivityBinding
@@ -56,8 +57,8 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.effectLiveData.observe(this){
             when(it){
-                is Effect.GoTo -> {
-                    navController.navigate(R.id.postsFragment)
+                is Effect.GoToPosts -> {
+                    navController.navigate(MobileNavigationDirections.openPostsFragment(it.baseUrl,it.api))
                 }
                 is Effect.ShowToast -> {
                 }

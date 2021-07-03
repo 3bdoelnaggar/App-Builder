@@ -11,7 +11,16 @@
   <fragment
       android:label="Posts"
       android:id="@+id/postsFragment"
-      android:name="com.objects.appbuilder.feature.postsList.PostsFragment" />
+      android:name="com.objects.appbuilder.feature.postsList.PostsFragment">
+    <argument
+        android:name="baseUrl"
+        app:nullable="false"
+        app:argType="string" />
+    <argument
+        android:name="api"
+        app:argType="string"
+        app:nullable="false" />
+  </fragment>
   <action
       android:id="@+id/openPostsFragment"
       app:destination="@id/postsFragment" />

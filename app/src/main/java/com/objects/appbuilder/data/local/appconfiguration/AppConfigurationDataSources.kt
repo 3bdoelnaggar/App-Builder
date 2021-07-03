@@ -4,7 +4,7 @@ import android.content.Context
 import com.google.gson.Gson
 import com.objects.appbuilder.base.Result
 import com.objects.appbuilder.base.safe
-import com.objects.appbuilder.data.local.appconfiguration.entites.AppConfiguration
+import com.objects.appbuilder.data.local.appconfiguration.entities.AppConfiguration
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton

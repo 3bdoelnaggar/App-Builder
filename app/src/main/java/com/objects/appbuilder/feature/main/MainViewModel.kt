@@ -1,8 +1,6 @@
 package com.objects.appbuilder.feature.main
 
-import android.os.Bundle
 import androidx.lifecycle.viewModelScope
-import com.objects.appbuilder.R
 import com.objects.appbuilder.base.*
 import com.objects.appbuilder.data.local.appconfiguration.AppConfigurationDataSources
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -42,8 +40,19 @@ class MainViewModel @Inject constructor(private val appConfigurationDataSources:
                         it.copy(isSelected = false)
                     }
                 }))
+            when(item.componentType){
+                ComponentType.LIST -> {
+                    _effectLiveData.value=
+                        item.api?.let { Effect.GoToPosts(currentState.data.baseUrl, it) }
+
+                }
+                ComponentType.WEB_VIEW -> {
+
+
+                }
+            }
+
         }
-        _effectLiveData.value=Effect.GoTo(R.id.postsFragment, Bundle())
     }
 }
 
