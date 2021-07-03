@@ -17,7 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PostsFragment : Fragment() {
 
-    private var columnCount = 1
 
     private val navArg: PostsFragmentArgs by navArgs()
     val viewModel: PostsViewModel by viewModels()
