@@ -21,7 +21,21 @@
         app:argType="string"
         app:nullable="false" />
   </fragment>
+  <fragment
+      android:id="@+id/webViewFragment"
+      android:label="Web View"
+      android:name="com.objects.appbuilder.feature.webView.WebViewFragment">
+    <argument
+        android:name="url"
+        app:argType="string"
+        app:nullable="false" />
+  </fragment>
+
   <action
       android:id="@+id/openPostsFragment"
       app:destination="@id/postsFragment" />
+
+  <action
+      android:id="@+id/openWebViewFragment"
+      app:destination="@id/webViewFragment" />
 </navigation>

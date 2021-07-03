@@ -8,16 +8,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.objects.appbuilder.R
-import com.objects.appbuilder.feature.postsList.placeholder.PlaceholderContent
 import dagger.hilt.android.AndroidEntryPoint
 
-/**
- * A fragment representing a list of Items.
- */
+
 @AndroidEntryPoint
 class PostsFragment : Fragment() {
 
@@ -25,13 +21,7 @@ class PostsFragment : Fragment() {
 
     private val navArg: PostsFragmentArgs by navArgs()
     val viewModel: PostsViewModel by viewModels()
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-        arguments?.let {
-            columnCount = it.getInt(ARG_COLUMN_COUNT)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,14 +29,10 @@ class PostsFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.post_list_fragment, container, false)
 
-        // Set the adapter
         if (view is RecyclerView) {
             with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-                adapter = PostsRecyclerViewAdapter(PlaceholderContent.ITEMS)
+                layoutManager = LinearLayoutManager(context)
+
             }
         }
         return view
@@ -74,18 +60,4 @@ class PostsFragment : Fragment() {
         }
     }
 
-    companion object {
-
-        // TODO: Customize parameter argument names
-        const val ARG_COLUMN_COUNT = "column-count"
-
-        // TODO: Customize parameter initialization
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-            PostsFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_COLUMN_COUNT, columnCount)
-                }
-            }
-    }
 }

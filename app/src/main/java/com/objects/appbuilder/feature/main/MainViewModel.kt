@@ -23,6 +23,7 @@ class MainViewModel @Inject constructor(private val appConfigurationDataSources:
                     val appConfiguration = result.data
                     val uiMainConfiguration = appConfiguration.toUiMainConfiguration()
                     _stateLiveData.value = MainState.Success(data = uiMainConfiguration)
+                    selectItem(uiMainConfiguration.menuItems.get(index = 1))
 
                 }
             }
@@ -47,7 +48,7 @@ class MainViewModel @Inject constructor(private val appConfigurationDataSources:
 
                 }
                 ComponentType.WEB_VIEW -> {
-
+                    _effectLiveData.value = item.url?.let { Effect.GoToWebView(it) }
 
                 }
             }

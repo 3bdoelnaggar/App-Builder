@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.emptyFragment,R.id.postsFragment
+                R.id.emptyFragment,R.id.postsFragment,R.id.webViewFragment
             ), drawerLayout
         )
 
@@ -59,6 +59,9 @@ class MainActivity : AppCompatActivity() {
             when(it){
                 is Effect.GoToPosts -> {
                     navController.navigate(MobileNavigationDirections.openPostsFragment(it.baseUrl,it.api))
+                }
+                is Effect.GoToWebView ->{
+                    navController.navigate(MobileNavigationDirections.openWebViewFragment(it.url))
                 }
                 is Effect.ShowToast -> {
                 }
