@@ -1,16 +1,10 @@
-package com.objects.appbuilder.feature.ui
+package com.objects.appbuilder.feature.main
 
-import android.graphics.Color
+import android.os.Bundle
 import androidx.lifecycle.viewModelScope
-import com.objects.appbuilder.base.ErrorResult
-import com.objects.appbuilder.base.State
-import com.objects.appbuilder.base.StateViewModel
-import com.objects.appbuilder.base.Success
+import com.objects.appbuilder.R
+import com.objects.appbuilder.base.*
 import com.objects.appbuilder.data.local.appconfiguration.AppConfigurationDataSources
-import com.objects.appbuilder.data.local.appconfiguration.entites.AppConfiguration
-import com.objects.appbuilder.data.local.appconfiguration.entites.MenuItem
-import com.objects.appbuilder.feature.main.UiMainConfiguration
-import com.objects.appbuilder.feature.main.UiMenuItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -49,31 +43,11 @@ class MainViewModel @Inject constructor(private val appConfigurationDataSources:
                     }
                 }))
         }
+        _effectLiveData.value=Effect.GoTo(R.id.postsFragment, Bundle())
     }
 }
 
-private fun AppConfiguration.toUiMainConfiguration(): UiMainConfiguration {
 
-    return UiMainConfiguration(
-        backgroundColor = Color.parseColor(appColor.pageBg),
-        toolbarBackgroundColor = Color.parseColor(appColor.headerBg),
-        toolbarTextColor = Color.parseColor(appColor.headerText),
-        sideMenuBackgroundColor = Color.parseColor(appColor.menuBg),
-        menuItemBackgroundColor = Color.parseColor(appColor.menuItemBGColor),
-        menuItemSelectedBackgroundColor = Color.parseColor(appColor.menuItemSelectedBgColor),
-        menuItems.map {
-            it.toUiMenuItem(
-                Color.parseColor(appColor.menuItemBGColor),
-                Color.parseColor(appColor.menuItemSelectedBgColor)
-            )
-        }
-    )
-
-}
-
-private fun MenuItem.toUiMenuItem(backgroundColor: Int, selectedColor: Int): UiMenuItem {
-    return UiMenuItem(title, false, backgroundColor, selectedColor)
-}
 
 sealed class MainState : State() {
     data class Success(val data: UiMainConfiguration) : MainState()
